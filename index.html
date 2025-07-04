@@ -130,9 +130,11 @@
     <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" alt="Selected Design">
 </div>
 <div class="thumbnail-sidebar" id="thumbnail-bar">
-    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" class="thumbnail-icon active" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" data-description="Description for Design 1: An abstract representation of calligraphic forms.">
-    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design2.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design2.jpg" data-description="Description for Design 2: A colorful abstract landscape with geometric and organic shapes.">
-    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design3.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design3.jpg" data-description="Description for Design 3: A stylized figure in motion, created with fragmented shapes.">
+    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" class="thumbnail-icon active" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" data-description="Design 1:
+The vertical lines and dots are binary code for the alphabet Alif written in Khat e Nastaliq .">
+    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design2.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design2.jpg" data-description="Description for Design 2:In this design, I likened the kind of graphs we often see showing the rate of AI progress to the form of the Minar e Pakistan.">
+    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design3.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design3.jpg" data-description="Description for Design 3:Here I added Mechanical limbs and a glowing digital eye to the Indus Valley Priest King symbol and depicted it in a dynamic pose.
+">
 </div>
                 </div>
                 <div class="description-panel" id="image-description">
@@ -244,6 +246,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- FIX: Logic for the Second Art Panel ---
+    const artPanel = document.getElementById('art-panel');
+    const artThumbnailBar = document.getElementById('art-thumbnail-bar');
+    const artImageDisplay = document.getElementById('art-image-display').querySelector('img');
+    const artDescriptionPanelText = document.getElementById('art-image-description').querySelector('p');
+
+    // Prevent panning when clicking inside the panel
+    artPanel.addEventListener('mousedown', (e) => e.stopPropagation());
+
+    // Handle thumbnail clicks to change the main image
+    artThumbnailBar.addEventListener('click', (e) => {
+        if (e.target.classList.contains('thumbnail-icon')) {
+            // Stop the click from triggering a pan on the background
+            e.stopPropagation();
+
+            // Update active state for the thumbnails in this panel
+            artThumbnailBar.querySelectorAll('.thumbnail-icon').forEach(icon => icon.classList.remove('active'));
+            e.target.classList.add('active');
+
+            // Update the main image and its description
+            artImageDisplay.src = e.target.dataset.image;
+            artDescriptionPanelText.textContent = e.target.dataset.description;
+        }
+    });
+    
     const videoPanel = document.getElementById('video-panel');
     const videoThumbnailBar = document.getElementById('video-thumbnail-bar');
     const videoDisplay = document.getElementById('video-display').querySelector('video');
