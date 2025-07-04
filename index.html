@@ -85,6 +85,22 @@
     .zoom-controls { position: fixed; bottom: 20px; left: 20px; z-index: 3; display: flex; flex-direction: column; gap: 5px; }
     .zoom-btn { width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.8); border: 1px solid #aaa; border-radius: 50%; font-size: 24px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .zoom-btn:hover { background-color: #fff; }
+/* --- Styling for the new, larger art panel --- */
+.large-node {
+    /* Positions the new node to the right of the original one */
+    left: calc(50% + 850px);
+    width: 700px; /* Wider */
+    height: 550px; /* Taller */
+}
+
+.thumbnail-sidebar-large {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Creates two columns of thumbnails */
+    gap: 10px;
+    flex-shrink: 0;
+    overflow-y: auto; /* Allows this specific sidebar to scroll if needed */
+    padding-right: 5px;
+}
 </style>
 </head>
 <body>
@@ -106,6 +122,18 @@
                     <p>Description for Design 3: A stylized figure in motion, created with fragmented shapes.</p>
                 </div>
             </div>
+            <div class="node large-node" id="art-panel">
+    <div class="panel-content-wrapper">
+        <div class="main-display" id="art-image-display">
+            <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(1).jfif" alt="Selected Artwork">
+        </div>
+        <div class="thumbnail-sidebar-large" id="art-thumbnail-bar">
+            </div>
+    </div>
+    <div class="description-panel" id="art-image-description">
+        <p>Artwork 1</p>
+    </div>
+</div>
         </div>
     </div>
     <div class="zoom-controls">
@@ -116,6 +144,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- Get all necessary elements ---
     const appContainer = document.getElementById('app-container');
     const world = document.getElementById('world');
     const panel = document.getElementById('main-panel');
@@ -127,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    // --- State for Pan & Zoom ---
     let scale = 1, panX = 0, panY = 0;
     let isPanning = false, panStartX = 0, panStartY = 0;
     
@@ -145,12 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateWorldTransform();
     }
 
-    // --- Unified Event Handlers ---
+    // --- Event Handlers for UI ---
     appContainer.addEventListener('mousedown', (e) => {
-        // Only pan if the click is on the container and not on the node or controls
         if (e.target.closest('.node') || e.target.closest('.zoom-controls')) return;
-        
-        // Pan with left or middle click
         if (e.button === 0 || e.button === 1) {
             e.preventDefault();
             isPanning = true;
@@ -161,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    window.addEventListener('mouseup', (e) => {
+    window.addEventListener('mouseup', () => {
         if (isPanning) {
             isPanning = false;
             appContainer.classList.remove('panning');
@@ -176,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
     zoomInBtn.addEventListener('click', () => handleZoom(-1, appContainer.clientWidth / 2, appContainer.clientHeight / 2));
     zoomOutBtn.addEventListener('click', () => handleZoom(1, appContainer.clientWidth / 2, appContainer.clientHeight / 2));
 
+    // --- Original Panel Logic ---
     const thumbnailBar = document.getElementById('thumbnail-bar');
     const mainImageDisplay = document.getElementById('main-image-display').querySelector('img');
     const descriptionPanelText = document.getElementById('image-description').querySelector('p');
@@ -190,7 +218,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // --- Generative Background Logic ---
+    // --- NEW: Logic for the Second Art Panel ---
+    const artPanel = document.getElementById('art-panel');
+    const artThumbnailBar = document.getElementById('art-thumbnail-bar');
+    const artImageDisplay = document.getElementById('art-image-display').querySelector('img');
+    const artDescriptionPanelText = document.getElementById('art-image-description').querySelector('p');
+    const artBaseUrl = "https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20";
+
+    for (let i = 1; i <= 11; i++) {
+        const imageUrl = `${artBaseUrl}(${i}).jfif`;
+        const thumb = document.createElement('img');
+        thumb.src = imageUrl;
+        thumb.className = 'thumbnail-icon';
+        thumb.dataset.image = imageUrl;
+        thumb.dataset.description = `Artwork ${i}`;
+        if (i === 1) {
+            thumb.classList.add('active');
+        }
+        artThumbnailBar.appendChild(thumb);
+    }
+
+    artThumbnailBar.addEventListener('click', (e) => {
+        if (e.target.classList.contains('thumbnail-icon')) {
+            e.stopPropagation();
+            artThumbnailBar.querySelectorAll('.thumbnail-icon').forEach(icon => icon.classList.remove('active'));
+            e.target.classList.add('active');
+            artImageDisplay.src = e.target.dataset.image;
+            artDescriptionPanelText.textContent = e.target.dataset.description;
+        }
+    });
+
+    // Prevent pannning when click starts inside the new panel
+    artPanel.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+    });
+    
+    // --- Generative Background Logic (Self-contained) ---
     let recordedPath = [], strokes = [], branches = [], brancherPool = [];
     const MARK_LIFETIME = 10000, BIFURCATION_STEPS = 20, BRANCH_FPS = 20, DEFAULT_LINE_WIDTH = 7, PEAK_LINE_WIDTH = 13;
     
@@ -212,8 +275,13 @@ document.addEventListener('DOMContentLoaded', () => {
     animate();
     setInterval(processBranchers, 1000 / BRANCH_FPS);
     setInterval(triggerPlayback, 8000);
-    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+    window.addEventListener('resize', () => { 
+        canvas.width = window.innerWidth; 
+        canvas.height = window.innerHeight;
+    });
 });
 </script>
+</body>
+</html>
 
 </body></html>
