@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0042)file:///C:/Users/Osman/Desktop/kyahua.html -->
+<!-- saved from url=(0051)file:///C:/Users/Osman/Desktop/Untitled-zxztx1.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -101,34 +101,63 @@
     overflow-y: auto; /* Allows this specific sidebar to scroll if needed */
     padding-right: 5px;
 }
+/* --- Styling for the new Video Panel --- */
+.video-node {
+    /* Positions the new panel to the right of the others */
+    left: calc(50% + 1900px); 
+    width: 960px; /* Wider to accommodate 16:9 aspect ratio */
+    height: 600px; /* Taller */
+}
+
+.video-main-display {
+    background-color: #000; /* Black background for video player */
+}
+
+.video-main-display video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures video is not cropped */
+}
 </style>
 </head>
 <body>
     <div id="app-container" class="">
         <canvas id="generative-art-canvas" width="1366" height="641"></canvas>
-        <div id="world" class="" style="transform: translate(-158.167px, 23.4167px) scale(0.833333);">
+        <div id="world" class="transitioning" style="transform: translate(12.5525px, 164.295px) scale(0.429982);">
             <div class="node" id="main-panel">
                 <div class="panel-content-wrapper">
                     <div class="main-display" id="main-image-display">
-                        <img src="./Generative Art with Interactive Panel4_files/Design3.jpg" alt="Selected Design">
+                        <img src="./Generative Art with Interactive Panel5_files/Design3.jpg" alt="Selected Design">
                     </div>
                     <div class="thumbnail-sidebar" id="thumbnail-bar">
-                        <img src="./Generative Art with Interactive Panel4_files/Design1.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" data-description="Description for Design 1: An abstract representation of calligraphic forms.">
-                        <img src="./Generative Art with Interactive Panel4_files/Design2.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design2.jpg" data-description="Description for Design 2: A colorful abstract landscape with geometric and organic shapes.">
-                        <img src="./Generative Art with Interactive Panel4_files/Design3.jpg" class="thumbnail-icon active" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design3.jpg" data-description="Description for Design 3: A stylized figure in motion, created with fragmented shapes.">
+                        <img src="./Generative Art with Interactive Panel5_files/Design1.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" data-description="Description for Design 1: An abstract representation of calligraphic forms.">
+                        <img src="./Generative Art with Interactive Panel5_files/Design2.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design2.jpg" data-description="Description for Design 2: A colorful abstract landscape with geometric and organic shapes.">
+                        <img src="./Generative Art with Interactive Panel5_files/Design3.jpg" class="thumbnail-icon active" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design3.jpg" data-description="Description for Design 3: A stylized figure in motion, created with fragmented shapes.">
                     </div>
                 </div>
                 <div class="description-panel" id="image-description">
                     <p>Description for Design 3: A stylized figure in motion, created with fragmented shapes.</p>
                 </div>
+                <div class="node video-node" id="video-panel">
+    <div class="panel-content-wrapper">
+        <div class="main-display video-main-display" id="video-display">
+            <video src="https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(1).mp4" muted loop autoplay playsinline></video>
+        </div>
+        <div class="thumbnail-sidebar-large" id="video-thumbnail-bar">
+            </div>
+    </div>
+    <div class="description-panel" id="video-description">
+        <p>Video 1</p>
+    </div>
+</div>
             </div>
             <div class="node large-node" id="art-panel">
     <div class="panel-content-wrapper">
         <div class="main-display" id="art-image-display">
-            <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(1).jfif" alt="Selected Artwork">
+            <img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (1).jfif" alt="Selected Artwork">
         </div>
         <div class="thumbnail-sidebar-large" id="art-thumbnail-bar">
-            </div>
+            <img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (1).jfif" class="thumbnail-icon active" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(1).jfif" data-description="Artwork 1"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (2).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(2).jfif" data-description="Artwork 2"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (3).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(3).jfif" data-description="Artwork 3"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (4).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(4).jfif" data-description="Artwork 4"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (5).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(5).jfif" data-description="Artwork 5"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (6).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(6).jfif" data-description="Artwork 6"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (7).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(7).jfif" data-description="Artwork 7"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (8).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(8).jfif" data-description="Artwork 8"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (9).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(9).jfif" data-description="Artwork 9"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (10).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(10).jfif" data-description="Artwork 10"><img src="./Generative Art with Interactive Panel5_files/AI Genrated Logo1 (11).jfif" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20(11).jfif" data-description="Artwork 11"></div>
     </div>
     <div class="description-panel" id="art-image-description">
         <p>Artwork 1</p>
@@ -142,23 +171,20 @@
     </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
 
     // --- Get all necessary elements ---
     const appContainer = document.getElementById('app-container');
     const world = document.getElementById('world');
-    const panel = document.getElementById('main-panel');
     const canvas = document.getElementById('generative-art-canvas');
     const ctx = canvas.getContext('2d');
     const zoomInBtn = document.getElementById('zoom-in-btn');
     const zoomOutBtn = document.getElementById('zoom-out-btn');
     
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
     // --- State for Pan & Zoom ---
     let scale = 1, panX = 0, panY = 0;
     let isPanning = false, panStartX = 0, panStartY = 0;
+    let didPan = false;
     
     function updateWorldTransform() {
         world.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
@@ -181,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.button === 0 || e.button === 1) {
             e.preventDefault();
             isPanning = true;
+            didPan = false;
             world.classList.remove('transitioning');
             panStartX = e.clientX - panX;
             panStartY = e.clientY - panY;
@@ -192,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isPanning) {
             isPanning = false;
             appContainer.classList.remove('panning');
+            setTimeout(() => { didPan = false; }, 50);
         }
     });
     
@@ -202,58 +230,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
     zoomInBtn.addEventListener('click', () => handleZoom(-1, appContainer.clientWidth / 2, appContainer.clientHeight / 2));
     zoomOutBtn.addEventListener('click', () => handleZoom(1, appContainer.clientWidth / 2, appContainer.clientHeight / 2));
-
+    
     // --- Original Panel Logic ---
-    const thumbnailBar = document.getElementById('thumbnail-bar');
-    const mainImageDisplay = document.getElementById('main-image-display').querySelector('img');
-    const descriptionPanelText = document.getElementById('image-description').querySelector('p');
+    const panel1 = document.getElementById('main-panel');
+    const thumbnailBar1 = document.getElementById('thumbnail-bar');
+    const mainImageDisplay1 = document.getElementById('main-image-display').querySelector('img');
+    const descriptionPanelText1 = document.getElementById('image-description').querySelector('p');
 
-    thumbnailBar.addEventListener('click', (e) => {
+    panel1.addEventListener('mousedown', (e) => e.stopPropagation()); // Prevent pan/drag inside panel
+    thumbnailBar1.addEventListener('click', (e) => {
         if (e.target.classList.contains('thumbnail-icon')) {
             e.stopPropagation();
-            thumbnailBar.querySelectorAll('.thumbnail-icon').forEach(icon => icon.classList.remove('active'));
+            thumbnailBar1.querySelectorAll('.thumbnail-icon').forEach(icon => icon.classList.remove('active'));
             e.target.classList.add('active');
-            mainImageDisplay.src = e.target.dataset.image;
-            descriptionPanelText.textContent = e.target.dataset.description;
+            mainImageDisplay1.src = e.target.dataset.image;
+            descriptionPanelText1.textContent = e.target.dataset.description;
         }
     });
-    
-    // --- NEW: Logic for the Second Art Panel ---
-    const artPanel = document.getElementById('art-panel');
-    const artThumbnailBar = document.getElementById('art-thumbnail-bar');
-    const artImageDisplay = document.getElementById('art-image-display').querySelector('img');
-    const artDescriptionPanelText = document.getElementById('art-image-description').querySelector('p');
-    const artBaseUrl = "https://raw.githubusercontent.com/seriousanimation/logos/main/images/AI%20Genrated%20Logo1%20";
 
-    for (let i = 1; i <= 11; i++) {
-        const imageUrl = `${artBaseUrl}(${i}).jfif`;
-        const thumb = document.createElement('img');
-        thumb.src = imageUrl;
+    // --- NEW: Logic for the Video Panel ---
+    const videoPanel = document.getElementById('video-panel');
+    const videoThumbnailBar = document.getElementById('video-thumbnail-bar');
+    const videoDisplay = document.getElementById('video-display').querySelector('video');
+    const videoDescriptionText = document.getElementById('video-description').querySelector('p');
+    const videoUrls = [
+        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(1).mp4",
+        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(3).mp4",
+        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(5).mp4",
+        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(7).mp4",
+        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(10).mp4",
+        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(11).mp4",
+        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(14).mp4"
+    ];
+
+    videoUrls.forEach((url, index) => {
+        const thumb = document.createElement('video');
+        thumb.src = url + '#t=0.5'; // Get a frame from the start for the thumbnail
         thumb.className = 'thumbnail-icon';
-        thumb.dataset.image = imageUrl;
-        thumb.dataset.description = `Artwork ${i}`;
-        if (i === 1) {
+        thumb.dataset.videoSrc = url;
+        thumb.dataset.description = `Video Clip ${index + 1}`;
+        thumb.muted = true;
+        if (index === 0) {
             thumb.classList.add('active');
         }
-        artThumbnailBar.appendChild(thumb);
-    }
+        videoThumbnailBar.appendChild(thumb);
+    });
 
-    artThumbnailBar.addEventListener('click', (e) => {
+    videoThumbnailBar.addEventListener('click', (e) => {
         if (e.target.classList.contains('thumbnail-icon')) {
             e.stopPropagation();
-            artThumbnailBar.querySelectorAll('.thumbnail-icon').forEach(icon => icon.classList.remove('active'));
+            videoThumbnailBar.querySelectorAll('.thumbnail-icon').forEach(icon => icon.classList.remove('active'));
             e.target.classList.add('active');
-            artImageDisplay.src = e.target.dataset.image;
-            artDescriptionPanelText.textContent = e.target.dataset.description;
+            videoDisplay.src = e.target.dataset.videoSrc;
+            videoDescriptionText.textContent = e.target.dataset.description;
+            videoDisplay.play();
         }
     });
 
-    // Prevent pannning when click starts inside the new panel
-    artPanel.addEventListener('mousedown', (e) => {
+    videoPanel.addEventListener('mousedown', (e) => {
         e.stopPropagation();
     });
-    
+
+
     // --- Generative Background Logic (Self-contained) ---
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     let recordedPath = [], strokes = [], branches = [], brancherPool = [];
     const MARK_LIFETIME = 10000, BIFURCATION_STEPS = 20, BRANCH_FPS = 20, DEFAULT_LINE_WIDTH = 7, PEAK_LINE_WIDTH = 13;
     
@@ -283,5 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
+
 
 </body></html>
