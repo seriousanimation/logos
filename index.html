@@ -127,13 +127,13 @@
             <div class="node" id="main-panel">
                 <div class="panel-content-wrapper">
                     <div class="main-display" id="main-image-display">
-                        <img src="./Generative Art with Interactive Panel5_files/Design3.jpg" alt="Selected Design">
-                    </div>
-                    <div class="thumbnail-sidebar" id="thumbnail-bar">
-                        <img src="./Generative Art with Interactive Panel5_files/Design1.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" data-description="Description for Design 1: An abstract representation of calligraphic forms.">
-                        <img src="./Generative Art with Interactive Panel5_files/Design2.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design2.jpg" data-description="Description for Design 2: A colorful abstract landscape with geometric and organic shapes.">
-                        <img src="./Generative Art with Interactive Panel5_files/Design3.jpg" class="thumbnail-icon active" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design3.jpg" data-description="Description for Design 3: A stylized figure in motion, created with fragmented shapes.">
-                    </div>
+    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" alt="Selected Design">
+</div>
+<div class="thumbnail-sidebar" id="thumbnail-bar">
+    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" class="thumbnail-icon active" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design1.jpg" data-description="Description for Design 1: An abstract representation of calligraphic forms.">
+    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design2.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design2.jpg" data-description="Description for Design 2: A colorful abstract landscape with geometric and organic shapes.">
+    <img src="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design3.jpg" class="thumbnail-icon" data-image="https://raw.githubusercontent.com/seriousanimation/logos/main/images/Design3.jpg" data-description="Description for Design 3: A stylized figure in motion, created with fragmented shapes.">
+</div>
                 </div>
                 <div class="description-panel" id="image-description">
                     <p>Description for Design 3: A stylized figure in motion, created with fragmented shapes.</p>
@@ -171,9 +171,8 @@
     </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Get all necessary elements ---
     const appContainer = document.getElementById('app-container');
     const world = document.getElementById('world');
     const canvas = document.getElementById('generative-art-canvas');
@@ -181,10 +180,11 @@
     const zoomInBtn = document.getElementById('zoom-in-btn');
     const zoomOutBtn = document.getElementById('zoom-out-btn');
     
-    // --- State for Pan & Zoom ---
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
     let scale = 1, panX = 0, panY = 0;
     let isPanning = false, panStartX = 0, panStartY = 0;
-    let didPan = false;
     
     function updateWorldTransform() {
         world.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
@@ -201,13 +201,11 @@
         updateWorldTransform();
     }
 
-    // --- Event Handlers for UI ---
     appContainer.addEventListener('mousedown', (e) => {
         if (e.target.closest('.node') || e.target.closest('.zoom-controls')) return;
         if (e.button === 0 || e.button === 1) {
             e.preventDefault();
             isPanning = true;
-            didPan = false;
             world.classList.remove('transitioning');
             panStartX = e.clientX - panX;
             panStartY = e.clientY - panY;
@@ -219,7 +217,6 @@
         if (isPanning) {
             isPanning = false;
             appContainer.classList.remove('panning');
-            setTimeout(() => { didPan = false; }, 50);
         }
     });
     
@@ -230,14 +227,13 @@
 
     zoomInBtn.addEventListener('click', () => handleZoom(-1, appContainer.clientWidth / 2, appContainer.clientHeight / 2));
     zoomOutBtn.addEventListener('click', () => handleZoom(1, appContainer.clientWidth / 2, appContainer.clientHeight / 2));
-    
-    // --- Original Panel Logic ---
+
     const panel1 = document.getElementById('main-panel');
     const thumbnailBar1 = document.getElementById('thumbnail-bar');
     const mainImageDisplay1 = document.getElementById('main-image-display').querySelector('img');
     const descriptionPanelText1 = document.getElementById('image-description').querySelector('p');
 
-    panel1.addEventListener('mousedown', (e) => e.stopPropagation()); // Prevent pan/drag inside panel
+    panel1.addEventListener('mousedown', (e) => e.stopPropagation());
     thumbnailBar1.addEventListener('click', (e) => {
         if (e.target.classList.contains('thumbnail-icon')) {
             e.stopPropagation();
@@ -248,31 +244,29 @@
         }
     });
 
-    // --- NEW: Logic for the Video Panel ---
     const videoPanel = document.getElementById('video-panel');
     const videoThumbnailBar = document.getElementById('video-thumbnail-bar');
     const videoDisplay = document.getElementById('video-display').querySelector('video');
     const videoDescriptionText = document.getElementById('video-description').querySelector('p');
-    const videoUrls = [
-        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(1).mp4",
-        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(3).mp4",
-        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(5).mp4",
-        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(7).mp4",
-        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(10).mp4",
-        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(11).mp4",
-        "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(14).mp4"
+    
+    const videoData = [
+        { url: "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(1).mp4", desc: "Video 1" },
+        { url: "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(3).mp4", desc: "Video 2" },
+        { url: "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(5).mp4", desc: "Video 3" },
+        { url: "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(7).mp4", desc: "Video 4" },
+        { url: "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(10).mp4", desc: "Video 5" },
+        { url: "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(11).mp4", desc: "Video 6" },
+        { url: "https://raw.githubusercontent.com/seriousanimation/logos/main/videos/vid%20(14).mp4", desc: "Video 7" }
     ];
 
-    videoUrls.forEach((url, index) => {
+    videoData.forEach((data, index) => {
         const thumb = document.createElement('video');
-        thumb.src = url + '#t=0.5'; // Get a frame from the start for the thumbnail
+        thumb.src = data.url + '#t=0.5';
         thumb.className = 'thumbnail-icon';
-        thumb.dataset.videoSrc = url;
-        thumb.dataset.description = `Video Clip ${index + 1}`;
+        thumb.dataset.videoSrc = data.url;
+        thumb.dataset.description = data.desc;
         thumb.muted = true;
-        if (index === 0) {
-            thumb.classList.add('active');
-        }
+        if (index === 0) thumb.classList.add('active');
         videoThumbnailBar.appendChild(thumb);
     });
 
@@ -287,14 +281,9 @@
         }
     });
 
-    videoPanel.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
-    });
-
-
-    // --- Generative Background Logic (Self-contained) ---
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    videoPanel.addEventListener('mousedown', (e) => e.stopPropagation());
+    
+    // --- Generative Background Logic ---
     let recordedPath = [], strokes = [], branches = [], brancherPool = [];
     const MARK_LIFETIME = 10000, BIFURCATION_STEPS = 20, BRANCH_FPS = 20, DEFAULT_LINE_WIDTH = 7, PEAK_LINE_WIDTH = 13;
     
@@ -316,10 +305,7 @@
     animate();
     setInterval(processBranchers, 1000 / BRANCH_FPS);
     setInterval(triggerPlayback, 8000);
-    window.addEventListener('resize', () => { 
-        canvas.width = window.innerWidth; 
-        canvas.height = window.innerHeight;
-    });
+    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 });
 </script>
 </body>
